@@ -19,6 +19,21 @@ public class MainActivity extends AppCompatActivity {
     private float[] magValues ,accValues;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+       sensorManager.unregisterListener(listener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.unregisterListener(listener);
+        sensorManager.registerListener(listener,magSensor,SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(listener,accSensor,SensorManager.SENSOR_DELAY_UI);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
